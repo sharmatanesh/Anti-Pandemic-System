@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/botton1"
+        android:title="Home"
+        android:icon="@drawable/ic_home"/>
+    <item android:id="@+id/botton2"
+        android:title="Diagnose"
+        android:icon="@drawable/ic_local_hospital"/>
+    <item android:id="@+id/botton3"
+        android:title="Victims"
+        android:icon="@drawable/ic_sentiment_very_dissatisfied"/>
+    <item android:id="@+id/botton4"
+        android:title="Map"
+        android:icon="@drawable/ic_add_location"/>
+    <item android:id="@+id/botton5"
+        android:title="Setting"
+        android:icon="@drawable/ic_settings_black"/>
+</menu>

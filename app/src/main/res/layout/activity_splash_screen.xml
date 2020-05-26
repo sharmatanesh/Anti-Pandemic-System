@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SplashScreen"
+    android:background="@color/colorWhite">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/splash"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Wabalaba dub dub"
+            android:layout_margin="5dp"
+            android:textColor="@color/colorBlack"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:fontFamily="monospace"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Simple Phrase"
+            android:layout_margin="5dp"
+            android:textColor="@color/colorBlack"
+            android:textSize="15sp"
+            android:textAlignment="center"
+            android:gravity="center_horizontal"
+            android:fontFamily="monospace"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
