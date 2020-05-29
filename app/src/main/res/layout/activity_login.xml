@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".setting">
+    tools:context=".Login">
     <LinearLayout
 
 
@@ -13,14 +13,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
         <TextView
             android:textAlignment="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Hello"
-            android:id="@+id/textViewUserEmail"
+            android:text="User Login"
+            android:id="@+id/textView"
             android:layout_gravity="center_horizontal"
             >
 
@@ -29,11 +28,11 @@
 
         <EditText
             android:layout_margin="15dp"
-            android:id="@+id/editName"
+            android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your Name"
-            android:inputType="text"
+            android:hint="Enter your email"
+            android:inputType="textEmailAddress"
             >
 
 
@@ -42,58 +41,34 @@
 
         <EditText
             android:layout_margin="15dp"
-            android:id="@+id/editNumber"
+            android:id="@+id/editTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter Mobile Number"
-            android:inputType="number"
+            android:hint="Enter your password"
+            android:inputType="textPassword"
             >
 
         </EditText>
 
-        <EditText
-            android:layout_margin="15dp"
-            android:id="@+id/editAdd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Your Address"
-            android:inputType="text"
-            >
-
-        </EditText>
 
 
 
 
         <Button
-            android:id="@+id/buttonSubmit"
+            android:id="@+id/buttonSignin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:text="Submit">
+            android:text="Sign up">
 
         </Button>
-
-
-
-
-        <Button
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Log Out"
-            android:id="@+id/buttonLogout"
-            android:layout_gravity="center_horizontal"/>
-
+        <TextView
+            android:textAlignment="center"
+            android:text="Not Registeres ? Sign up here"
+            android:id="@+id/textViewSignup"
+            android:layout_margin="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/nav"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:itemBackground="@color/colorWhite"
-        app:itemTextColor="@drawable/selector"
-        app:itemIconTint="@drawable/selector"
-        app:menu="@menu/bottom_nav"
-        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

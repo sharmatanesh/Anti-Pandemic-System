@@ -17,6 +17,20 @@ import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.firebase.messaging.FirebaseMessaging;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -33,6 +47,9 @@ public class Check extends AppCompatActivity {
     RadioButton permans1,ques1ans1,ques2ans1,ques3ans1,ques4ans1,ques5ans1,ques6ans1,ques7ans1,ques8ans1,ques9ans1,ques10ans1,ques11ans1,ques12ans1,ques13ans1,ques14ans1,ques15ans1, permans2,ques1ans2,ques2ans2,ques3ans2,ques4ans2,ques5ans2,ques6ans2,ques7ans2,ques8ans2,ques9ans2,ques10ans2,ques11ans2,ques12ans2,ques13ans2,ques14ans2,ques15ans2;
     int status;
     boolean ch1,ch2,ch3,ch4,ch5,ch6,ch7,ch8,ch9,ch10,ch11,ch12,ch13,ch14,ch15;
+    private RequestQueue requestQueue;
+    private String URL="https://fcm.googleapis.com/fcm/send";
+    String result;
     ScrollView scroll;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -452,10 +469,17 @@ public class Check extends AppCompatActivity {
             public void onClick(View v) {
                 status = (status*10)+0;
                 ch15 = false;
-                String result = checkResult();
+                result = checkResult();
                 openDialog(result);
             }
         });
+        requestQueue= Volley.newRequestQueue(this);
+        FirebaseMessaging.getInstance().subscribeToTopic("news");
+        try {
+            sendNotification();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     private String checkResult() {
@@ -517,5 +541,50 @@ public class Check extends AppCompatActivity {
     private void openDialog(String msg) {
         ExampleDialog exampleDialog = new ExampleDialog(msg);
         exampleDialog.show(getSupportFragmentManager(),"example dialog");
+    }
+    private void sendNotification() throws JSONException {
+
+        JSONObject mainObj=new JSONObject();
+        try {
+            mainObj.put("to",result);
+            JSONObject notificationObj = new JSONObject();
+            notificationObj.put("title",result);
+            JSONObject extraData=new JSONObject();
+            extraData.put("brandId",result);
+
+            mainObj.put("notification",notificationObj);
+            mainObj.put("data",extraData);
+
+            JsonObjectRequest request=new JsonObjectRequest(Request.Method.POST, URL,
+                    mainObj,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            }
+            ){
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String,String> header=new HashMap<>();
+                    header.put("content-type","application/json");
+                    header.put("authorization","key=AAAAJQjY6OA:APA91bGhNlyjEYmiCbovN4Ut44ufauZG3GBuTxlKtiL4PWYvhevB8N0DaGecY3Sef_rX48PWLUQXzJE_6sG8aFhRchbKjyo-Kj51SMMJK3ozLNGaWrspVu658rOnjXTG7cRABsa7vujz");
+                    return header;
+                }
+            };
+
+            requestQueue.add(request);
+
+        }catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+
+
     }
 }
