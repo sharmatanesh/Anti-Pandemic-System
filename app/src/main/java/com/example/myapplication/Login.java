@@ -69,7 +69,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
             return;
         }
 
-        progressDialog.setMessage("Registration in Process");
+        progressDialog.setMessage("Login in Process");
         progressDialog.show();
         firebaseAuth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -105,6 +105,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
         }
         if(v==textViewSignup)
         {
+            finish();
             startActivity(new Intent(getApplicationContext(),Register.class));
         }
 

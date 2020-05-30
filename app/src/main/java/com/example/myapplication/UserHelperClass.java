@@ -2,17 +2,21 @@ package com.example.myapplication;
 
 public class UserHelperClass {
 
-    String Name,Number,Adderess;
+    String Name,Number,Adderess,Status,Email;
 
-    public UserHelperClass(String name, String number, String adderess) {
+    public UserHelperClass(String email, String name, String number, String adderess) {
         Name = name;
         Number = number;
         Adderess = adderess;
+        Email = email;
     }
     public UserHelperClass()
     {
 
     }
+    public void setEmail(String email){Email = email;}
+
+    public String getEmail(){return Email;}
 
     public String getName() {
         return Name;
@@ -37,4 +41,5 @@ public class UserHelperClass {
     public void setAdderess(String adderess) {
         Adderess = adderess;
     }
+
 }

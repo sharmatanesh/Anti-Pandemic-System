@@ -2,20 +2,34 @@ package com.example.myapplication;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class setting extends AppCompatActivity implements View.OnClickListener {
     private FirebaseAuth firebaseAuth;
@@ -23,11 +37,12 @@ public class setting extends AppCompatActivity implements View.OnClickListener {
     private Button buttonLogout;
     private EditText editName;
     private EditText editNumber;
-    private EditText editAdd;
+    private EditText editAdd,editEmail,editStatus,editLat,editLang;
     private Button buttonSubmit;
     private FirebaseDatabase rootNode;
     private DatabaseReference databaseReference;
     private BottomNavigationView bottomNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,6 +93,11 @@ public class setting extends AppCompatActivity implements View.OnClickListener {
         editName = findViewById(R.id.editName);
         editNumber = findViewById(R.id.editNumber);
         editAdd = findViewById(R.id.editAdd);
+        editEmail = findViewById(R.id.editEmail);
+        editEmail.setText(user.getEmail());
+        editStatus = findViewById(R.id.status);
+        editLat = findViewById(R.id.editLat);
+        editLang = findViewById(R.id.editLang);
         buttonSubmit = findViewById(R.id.buttonSubmit);
         buttonLogout.setOnClickListener(this);
         buttonSubmit.setOnClickListener(this);
@@ -99,15 +119,9 @@ public class setting extends AppCompatActivity implements View.OnClickListener {
                 String Name=editName.getText().toString();
                 String Number=editNumber.getText().toString();
                 String Address=editAdd.getText().toString();
-
-
-                UserHelperClass helperClass = new UserHelperClass(Name,Number,Address);
-
-                databaseReference.child(Number).setValue(helperClass);
-
-
-
-
+                String Email = editEmail.getText().toString();
+                UserHelperClass helperClass = new UserHelperClass(Email,Name,Number,Address);
+                databaseReference.setValue(helperClass);
             }
 
 
