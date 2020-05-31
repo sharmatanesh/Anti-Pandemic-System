@@ -545,7 +545,7 @@ public class Check extends AppCompatActivity {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser user = firebaseAuth.getCurrentUser();
         Status stat = new Status(user.getEmail(),Integer.toString(status));
-        databaseReference.setValue(stat);
+        databaseReference.child(user.getUid()).setValue(stat);
         return result;
     }
 

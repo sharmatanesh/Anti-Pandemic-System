@@ -121,7 +121,7 @@ public class setting extends AppCompatActivity implements View.OnClickListener {
                 String Address=editAdd.getText().toString();
                 String Email = editEmail.getText().toString();
                 UserHelperClass helperClass = new UserHelperClass(Email,Name,Number,Address);
-                databaseReference.setValue(helperClass);
+                databaseReference.child(Number).setValue(helperClass);
             }
 
 
